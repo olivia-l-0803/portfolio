@@ -1,0 +1,28 @@
+import openmeteo_requests
+import requests
+
+def getWeather():
+    get = requests.get("https://api.open-meteo.com/v1/forecast?latitude=40.6&longitude=-70.1&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m,apparent_temperature&current=temperature_2m&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch")
+    if get.status_code != 200:
+        return "Error!!"
+        #catches errors in getting the data
+
+    data = get.json()
+
+    Daily = {
+
+    }
+    for i in range(0,7):
+        Daily[data["daily"]["time"][i]]= (data["daily"]["temperature_2m_max"][i], data["daily"]["temperature_2m_min"][i])
+
+        
+
+    return{
+        "Time Zone": data["timezone"],
+        "Coordinates": (data["latitude"], data["longitude"]),
+        "Current Temperature": str(data["current"]["temperature_2m"]) + data["current_units"]["temperature_2m"],
+        "Daily Max": Daily
+    }
+    
+
+print(getWeather())
