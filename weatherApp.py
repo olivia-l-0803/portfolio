@@ -12,7 +12,8 @@ Main.geometry("1000x600")
 Main.resizable(False, False)
 #Sets up the main window and also sets the size
 
-Heading = Frame(master=Main, background= "Powder Blue")
+Heading = Frame(master=Main, background= "Powder Blue", padx= 10, pady= 10, relief="raised", height= 400, width= 400)
+Heading.place(anchor= NW)
 
 
 
