@@ -8,8 +8,8 @@ requests.get()
  """
 
 #These are the coordinates of SITHS
-
-#latitude
+#latitude 40.5679°
+#longitude -74.1170°
 
 
 
