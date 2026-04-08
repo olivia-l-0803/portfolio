@@ -22,4 +22,4 @@ print(f"month: {month}, day: {day}, year: {year}")
 #testing current date / time
 import datetime
 print(datetime.date.today())
-print(datetime.datetime.now()[7])
+print(datetime.datetime.now())
