@@ -35,5 +35,9 @@ def getCurrentTemp(): #Current temperature is here
             "Apparent Temperature": str(data["current"]["temperature_2m"]) + data["current_units"]["temperature_2m"]}
     
 
-#print(getTempWeek())
+
 #Testing this
+
+curTemp = getCurrentTemp()
+weekTemp = getTempWeek()
+print(curTemp, weekTemp)
