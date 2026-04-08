@@ -1,7 +1,10 @@
 import datetime
-dt = str(datetime.datetime.now()) #collects data
-curdate = dt[0:10] #extracts date
-curtime24 = dt[11:16] #extracts time!!
+dt = datetime.datetime.now() #collects data
+ 
+curdate = dt.strftime("%m/%d/%Y") #extracts date
+
+
+curtime24 = dt.strftime("%H:%M") #extracts time!!
 
 hour = int(curtime24[0:2]) #splitting into hour and minute!
 min = curtime24[3:5]
