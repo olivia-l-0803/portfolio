@@ -23,16 +23,21 @@ abbreviation = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
 weekday = abbreviation[num]
 
 
-def findWeekday(m,d,y):
-    num = datetime.datetime(month= m, day= d, year= y)
+def findWeekday(daysahead: int):
+    num = datetime.datetime.today()
     num = num.weekday()
-    return abbreviation[num]
+    try:
+        x = abbreviation[num + daysahead]
+    except IndexError:
+        x = abbreviation[0]
+
+    return x
 
 
 
 print(curdate, curtime24, curtime12, weekday) #<-testing
 
-print(findWeekday(4,12,2026)) 
+print(findWeekday(1)) 
 
 
 
