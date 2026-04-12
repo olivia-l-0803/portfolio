@@ -46,14 +46,18 @@ Label(master= Main , padx= 10, pady = 10, font= (Font, 25 ), bg= Color2, fg= Fon
 
 Weekly = Frame(master=Main, bd=4, padx=10 ,pady=10)
 Weekly.config(bg= Color2)
-Weekly.place(relx= 0.6, rely= 0.2 , anchor= "n" )
+Weekly.place(relx= 0.7, rely= 0.2 , anchor= "n" )
 
-for i in range(1,8):
+for i in range(0,7):
     maxT = weekTemp[i][1]
     minT = weekTemp[i][2]
     date= weekTemp[i]
-    DayofWeek = findWeekday(i)
+    DayofWeek = findWeekday(i+1)
     Label(master= Weekly, font= (Font, 15), bg= Color2, fg= Fontcolor, text= DayofWeek).grid(row= 0, column=i)
+    Label(master= Weekly, font= (Font, 15), bg= Color2, fg= Fontcolor, text= maxT).grid(row= 1, column=i)
+    Label(master= Weekly, font= (Font, 15), bg= Color2, fg= Fontcolor, text= minT).grid(row= 2, column=i)
+    
+
 
 
 Main.mainloop()
