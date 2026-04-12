@@ -48,12 +48,11 @@ Weekly = Frame(master=Main, bd=4, padx=10 ,pady=10)
 Weekly.config(bg= Color2)
 Weekly.place(relx= 0.6, rely= 0.2 , anchor= "n" )
 
-for i in range(7):
+for i in range(1,8):
     maxT = weekTemp[i][1]
     minT = weekTemp[i][2]
     date= weekTemp[i]
-    a,b,c = int(date[5:7]), int(date[8:10]), int(date[0:5]) #breaking down date again....
-    DayofWeek = findWeekday(a, b, c)
+    DayofWeek = findWeekday(i)
     Label(master= Weekly, font= (Font, 15), bg= Color2, fg= Fontcolor, text= DayofWeek).grid(row= 0, column=i)
 
 
