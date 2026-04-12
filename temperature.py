@@ -9,19 +9,14 @@ def getTempWeek(): #function for weekly highs and lows
 
     data = get.json()
 
-    Daily = {
+    Daily =[]
 
-    }
     for i in range(0,7):
-        Daily[data["daily"]["time"][i]]= (data["daily"]["temperature_2m_max"][i], data["daily"]["temperature_2m_min"][i])
-    #Organizing temperatures by date
+        Daily.append((data["daily"]["time"][i], data["daily"]["temperature_2m_max"][i], data["daily"]["temperature_2m_min"][i])) 
+    #tuple content: Date, Max, Min
+    #Organizing temperatures by days after
 
-    return{
-        #"Time Zone": data["timezone"],
-        #"Coordinates": (data["latitude"], data["longitude"]),
-        "Current Temperature": str(data["current"]["temperature_2m"]) + data["current_units"]["temperature_2m"],
-        "Daily Max, Min": Daily
-    }
+    return Daily
 
 def getCurrentTemp(): #Current temperature is here
     get = requests.get("https://api.open-meteo.com/v1/forecast?latitude=40.6&longitude=-70.1&daily=temperature_2m_max,temperature_2m_min&hourly=temperature_2m,apparent_temperature&current=temperature_2m&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch")
@@ -41,3 +36,5 @@ def getCurrentTemp(): #Current temperature is here
 curTemp = getCurrentTemp()
 weekTemp = getTempWeek()
 print(curTemp, weekTemp)
+
+print(weekTemp[0][0])

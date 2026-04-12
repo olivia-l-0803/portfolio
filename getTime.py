@@ -1,6 +1,6 @@
 import datetime
 dt = datetime.datetime.now() #collects data
- 
+print(dt)
 curdate = dt.strftime("%m/%d/%Y") #extracts date
 
 
@@ -23,5 +23,14 @@ abbreviation = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
 weekday = abbreviation[num]
 
 
+def findWeekday(m,d,y):
+    num = datetime.datetime(month= m, day= d, year= y)
+    num = num.weekday()
+    return abbreviation[num]
+
+
+
 print(curdate, curtime24, curtime12, weekday) #<-testing
+
+print(findWeekday(4,12,2026)) 
 #get date and time!! 
