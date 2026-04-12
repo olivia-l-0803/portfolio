@@ -1,6 +1,6 @@
 import datetime
 dt = datetime.datetime.now() #collects data
-print(dt)
+
 curdate = dt.strftime("%m/%d/%Y") #extracts date
 
 
@@ -33,4 +33,6 @@ def findWeekday(m,d,y):
 print(curdate, curtime24, curtime12, weekday) #<-testing
 
 print(findWeekday(4,12,2026)) 
+
+print(findWeekday("4",12,2026)) 
 #get date and time!! 
