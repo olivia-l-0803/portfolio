@@ -29,7 +29,8 @@ def findWeekday(daysahead: int):
     try:
         x = abbreviation[num + daysahead]
     except IndexError:
-        x = abbreviation[0]
+
+        x = abbreviation[daysahead- (7-num)]
 
     return x
 
@@ -38,7 +39,7 @@ def findWeekday(daysahead: int):
 print(curdate, curtime24, curtime12, weekday) #<-testing
 
 print(findWeekday(1)) 
-
+print(findWeekday(5)) 
 
 
 #get date and time!! 
