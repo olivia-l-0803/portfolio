@@ -49,7 +49,7 @@ class dateDisplay(ctk.CTkFrame):
         
 class addIcon(ctk.CTkLabel):
     
-    def __init__(self, master = Main, fileName = "22.png"):
+    def __init__(self, master = Main, fileName = "icons\partlyCloudy.png"):
         super().__init__(master= Main, anchor= "center", fg_color= "transparent", text = "")
         
         pil_image = Image.open(fileName)
@@ -60,7 +60,7 @@ class addIcon(ctk.CTkLabel):
         
 x = Heading()
 y= dateDisplay()
-icon= addIcon()
+icon= addIcon(fileName="icons\partlyCloudy.png")
 
 Main.mainloop()
 print("xx")

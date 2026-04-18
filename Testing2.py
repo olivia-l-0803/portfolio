@@ -40,7 +40,6 @@ apparentTemp.pack()
 # 'At a glance' section
 
 
-
 Label(master= Main , padx= 10, pady = 10, font= (Font, 30 ), bg= Color2, fg= Fontcolor, text= "Weekly Forecast").place(anchor="n", relx = 0.68, rely = 0.01)
 
 

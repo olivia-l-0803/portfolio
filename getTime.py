@@ -12,7 +12,7 @@ if hour > 12:
     hour -= 12
     curtime12 = f"{hour}:{min} PM"
 else: 
-    curtime12 = f"{hour}:{min} AM"
+    curtime12 = f"{hour}:{min} AM" #12 hr format
 
 #weekday
 num = datetime.datetime.today()
