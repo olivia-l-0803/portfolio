@@ -1,16 +1,16 @@
-import openmeteo_requests
-import requests
+#laying a foundation with TKinter. This is not the final product
+
 
 import tkinter
 from tkinter import *
 #needed for the user interface
 
-from temperature import curTemp, weekTemp
+from getWeather import curTemp, weekTemp
 from getTime import curdate, curtime12, curtime24, weekday
 from getTime import findWeekday
 #import from my own code!
 
-Main = Tk("Weather App")
+Main = Tk("Demo")
 Color1 = "#65737c"
 Color2 = "#303e4b"
 Font = "Poppins"
