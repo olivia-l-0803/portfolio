@@ -1,5 +1,5 @@
 
-from typing import Any, Tuple
+from typing import Any, Callable, Tuple
 
 import customtkinter as ctk
 from customtkinter import *
@@ -81,10 +81,19 @@ class WeeklyPanel(ctk.CTkFrame):
 
             pil_image = Image.open(weekWeather[i][0]).resize([100,100])
             ctkimage = ctk.CTkImage(light_image= pil_image, size= [40,40]) #stores image 
-            ctk.CTkLabel(master= self, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= i, column=2, padx= (35, 10))
+            ctk.CTkLabel(master= self, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= i, column=2, padx= (20, 10))
 
             self.rowconfigure(index= i, weight= 1) #ensures all rows are equal
 
+class HourlyTABS(ctk.CTkTabview):
+    def __init__(self, master= Main):
+        super().__init__(master= Main, width= 575, height=200, corner_radius=30, fg_color= Color)
+        self.place(anchor = CENTER, relx = 3.5, rely=0.6 )
+         
+
+        #adding temperature section
+        self.add("Temperature")
+        button = ctk.CTkButton(master=self.tab("Temperature")).pack()
 
 
 
@@ -93,6 +102,7 @@ y= dateDisplay()
 icon= addIcon(fileName= interpretedCode[0])
 weekly = WeeklyPanel()
 ctk.CTkLabel(master= Main, font= (Font, 30 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= "Weekly Forecast").place(relx= 0.8, rely= 0.075, anchor= "center")# a label for the weekly section
+Hour= HourlyTABS()
 
 Main.mainloop()
 print("xx")
