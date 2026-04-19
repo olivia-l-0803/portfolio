@@ -76,12 +76,12 @@ class WeeklyPanel(ctk.CTkFrame):
             date= weekTemp[i]
             DayofWeek = findWeekday(i+1)
             ctk.CTkLabel(master= self, font= (Font, 20), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= DayofWeek    ).grid(row= i, column=0, padx=(20, 10)) #adds the weekday
-            ctk.CTkLabel(master= self, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{maxT} (°F) | {minT} (°F)").grid(row= i, column=1,) #Max and Min temp
+            ctk.CTkLabel(master= self, font= (Font, 17), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{maxT} (°F) | {minT} (°F)").grid(row= i, column=1,) #Max and Min temp
             
 
-            pil_image = Image.open(weekWeather[i]).resize([100,100])
+            pil_image = Image.open(weekWeather[i][0]).resize([100,100])
             ctkimage = ctk.CTkImage(light_image= pil_image, size= [40,40]) #stores image 
-            ctk.CTkLabel(master= self, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= i, column=2)
+            ctk.CTkLabel(master= self, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= i, column=2, padx= (35, 10))
 
             self.rowconfigure(index= i, weight= 1) #ensures all rows are equal
 
@@ -92,7 +92,7 @@ x = Heading()
 y= dateDisplay()
 icon= addIcon(fileName= interpretedCode[0])
 weekly = WeeklyPanel()
-ctk.CTkLabel(master= Main, font= (Font, 30 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= "Weekly Forecast").place(relx= 0.8, rely= 0.075, anchor= "center")
+ctk.CTkLabel(master= Main, font= (Font, 30 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= "Weekly Forecast").place(relx= 0.8, rely= 0.075, anchor= "center")# a label for the weekly section
 
 Main.mainloop()
 print("xx")

@@ -72,7 +72,7 @@ def getForecastWeek(): #function for the weathercode
     Codes =[]
 
     for i in range(0,7):
-        Codes.append(data["daily"]["weather_code"][i]) 
+        Codes.append(codeToPicture(data["daily"]["weather_code"][i])) 
     #tuple content: Date, Max, Min
     #Organizing temperatures by days after
 
