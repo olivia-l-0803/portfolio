@@ -8,7 +8,7 @@ from PIL import Image
 
 #needed for the user interface
 
-from getWeather import curTemp, weekTemp
+from getWeather import curTemp, weekTemp, interpretedCode
 from getTime import curdate, curtime12, curtime24, weekday
 from getTime import findWeekday
 #import from my own code!
@@ -49,7 +49,7 @@ class dateDisplay(ctk.CTkFrame):
         
 class addIcon(ctk.CTkLabel):
     
-    def __init__(self, master = Main, fileName = "icons\partlyCloudy.png"):
+    def __init__(self, master = Main, fileName = "icon/sunny.png"):
         super().__init__(master= Main, anchor= "center", fg_color= "transparent", text = "")
         
         pil_image = Image.open(fileName)
@@ -60,7 +60,7 @@ class addIcon(ctk.CTkLabel):
         
 x = Heading()
 y= dateDisplay()
-icon= addIcon(fileName="icons\partlyCloudy.png")
+icon= addIcon(fileName= interpretedCode[0])
 
 Main.mainloop()
 print("xx")

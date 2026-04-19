@@ -41,25 +41,25 @@ def currentWeatherCode():
 
 def codeToPicture(code: int): #this will interpret the code to an emoji. Using google noto color emoji for icons
     if code == 0: 
-        return "icons\sunny.png", "Clear Sky"
+        return "icons/sunny.png", "Clear Sky"
     if code == 1 or code == 2: 
-        return "icons\partlyCloudy.png", "Partly Cloudy"
+        return "icons/partlyCloudy.png", "Partly Cloudy"
     if code == 3: 
-        return "icons\cloudy.png", "Overcast"
+        return "icons/cloudy.png", "Overcast"
     if code == 45 or code == 48:
-        return "icons\foggy.png", "Foggy"
+        return "icons/foggy.png", "Foggy"
     if code in (51, 53, 55):
-        return "icons\drizzle.png", "Drizzle"
+        return "icons/drizzle.png", "Drizzle"
     if code in (56, 57):
-        return "icons\snow.png", "Freezing Drizzle"
+        return "icons/snow.png", "Freezing Drizzle"
     if code in (61, 63, 65):
-        return "icons\rainy.png", "Rainy"
+        return "icons/rainy.png", "Rainy"
     if code in (66, 67):
-        return "icons\snow.png", "Freezing Rain"
+        return "icons/snow.png", "Freezing Rain"
     if code in (71, 73, 75, 77, 85, 86):
-        return "icons\snow.png", "Snow"
+        return "icons/snow.png", "Snow"
     if code in (95, 96, 99):
-        return "icons\thunderstorm.png", "Thunderstorm"
+        return "icons/thunderstorm.png", "Thunderstorm"
     
     
     
@@ -76,6 +76,9 @@ print(weekTemp[0][0])
 curCode = currentWeatherCode()
 
 interpretedCode = codeToPicture(curCode)
+
+print(curCode, interpretedCode[0], interpretedCode[1])
+
 
 
 
