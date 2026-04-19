@@ -12,7 +12,7 @@ def getTempWeek(): #function for weekly highs and lows
     Daily =[]
 
     for i in range(0,7):
-        Daily.append((data["daily"]["time"][i], data["daily"]["temperature_2m_max"][i], data["daily"]["temperature_2m_min"][i])) 
+        Daily.append((data["daily"]["time"][i], str(data["daily"]["temperature_2m_max"][i]), str(data["daily"]["temperature_2m_min"][i]))) 
     #tuple content: Date, Max, Min
     #Organizing temperatures by days after
 
@@ -61,7 +61,22 @@ def codeToPicture(code: int): #this will interpret the code to an emoji. Using g
     if code in (95, 96, 99):
         return "icons/thunderstorm.png", "Thunderstorm"
     
-    
+def getForecastWeek(): #function for the weathercode
+    get = requests.get("https://api.open-meteo.com/v1/forecast?latitude=40.6&longitude=-70.1&daily=weather_code&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch")
+    if get.status_code != 200:
+        return "Error!!"
+        #catches errors in getting the data
+
+    data = get.json()
+
+    Codes =[]
+
+    for i in range(0,7):
+        Codes.append(data["daily"]["weather_code"][i]) 
+    #tuple content: Date, Max, Min
+    #Organizing temperatures by days after
+
+    return Codes  
     
     
 
@@ -77,7 +92,10 @@ curCode = currentWeatherCode()
 
 interpretedCode = codeToPicture(curCode)
 
-print(curCode, interpretedCode[0], interpretedCode[1])
+print(curCode, interpretedCode[0], interpretedCode[1]) #testing the Current Weather icon
+
+print(getForecastWeek()) #testing weekly forecast
+weekWeather = getForecastWeek()
 
 
 

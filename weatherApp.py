@@ -8,7 +8,7 @@ from PIL import Image
 
 #needed for the user interface
 
-from getWeather import curTemp, weekTemp, interpretedCode
+from getWeather import curTemp, weekTemp, interpretedCode, weekWeather
 from getTime import curdate, curtime12, curtime24, weekday
 from getTime import findWeekday
 #import from my own code!
@@ -24,6 +24,7 @@ ctk.set_appearance_mode("light")
 Font = "Inter"
 Fontcolor = ("#4a5356","#CAD9E2")
 Color = ("#c4d6d3","#627c89")
+Color2 = ("#a0b3af","#36464e")
 #Theme Information  
 
 class Heading(ctk.CTkFrame):
@@ -60,10 +61,38 @@ class addIcon(ctk.CTkLabel):
         self.place(relx= 0.45, rely= 0.25 , anchor= "center")
 
         self.label = ctk.CTkLabel(master= Main, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).place(relx= 0.45, rely= 0.35 , anchor= "center")
-        
+
+
+class WeeklyPanel(ctk.CTkFrame):
+    def __init__(self):
+        super().__init__(master = Main, fg_color= Color, corner_radius= 30,  height= 475, width= 325)
+        self.grid_propagate(FALSE)
+        self.place(relx= 0.8, rely= 0.55, anchor= "center")
+
+        for i in range(0,7):
+            ctk.CTkFrame(master = self, fg_color= Color, corner_radius= 30, border_width=3, border_color= Color2, height= 50, width= 300).pack(expand=True, fill=BOTH, in_= self, pady = 10, padx= 10)
+            maxT = weekTemp[i][1]
+            minT = weekTemp[i][2]
+            date= weekTemp[i]
+            DayofWeek = findWeekday(i+1)
+            ctk.CTkLabel(master= self, font= (Font, 20), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= DayofWeek    ).grid(row= i, column=0, padx=(20, 10)) #adds the weekday
+            ctk.CTkLabel(master= self, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{maxT} (°F) | {minT} (°F)").grid(row= i, column=1,) #Max and Min temp
+            
+
+            pil_image = Image.open(weekWeather[i]).resize([100,100])
+            ctkimage = ctk.CTkImage(light_image= pil_image, size= [40,40]) #stores image 
+            ctk.CTkLabel(master= self, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= i, column=2)
+
+            self.rowconfigure(index= i, weight= 1) #ensures all rows are equal
+
+
+
+
 x = Heading()
 y= dateDisplay()
 icon= addIcon(fileName= interpretedCode[0])
+weekly = WeeklyPanel()
+ctk.CTkLabel(master= Main, font= (Font, 30 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= "Weekly Forecast").place(relx= 0.8, rely= 0.075, anchor= "center")
 
 Main.mainloop()
 print("xx")
