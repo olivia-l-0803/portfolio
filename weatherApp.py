@@ -45,6 +45,7 @@ class dateDisplay(ctk.CTkFrame):
 
         self.timeTitle = ctk.CTkLabel(master=self , font= (Font, 20 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= curtime12).pack(padx= 10, pady= (10,0))
         self.dayTitle = ctk.CTkLabel(master=self , font= (Font, 15 ), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= f"{weekday}, {curdate}").pack(padx= 10)
+        #self.Sky = ctk.CTkLabel(master=self , font= (Font, 20 ), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).pack(padx= 10, pady= (10,0))
         
         
 class addIcon(ctk.CTkLabel):
@@ -57,6 +58,8 @@ class addIcon(ctk.CTkLabel):
         self.ctkimage = ctk.CTkImage(light_image= pil_image, size= [100,100]) #stores image 
         self.configure(image = self.ctkimage)
         self.place(relx= 0.45, rely= 0.25 , anchor= "center")
+
+        self.label = ctk.CTkLabel(master= Main, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).place(relx= 0.45, rely= 0.35 , anchor= "center")
         
 x = Heading()
 y= dateDisplay()
