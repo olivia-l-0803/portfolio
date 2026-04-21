@@ -10,9 +10,15 @@ hour = int(curtime24[0:2]) #splitting into hour and minute!
 min = curtime24[3:5]
 if hour > 12: 
     hour -= 12
-    curtime12 = f"{hour}:{min} PM"
+    if hour <= 9:
+        curtime12 = f"0{hour}:{min} PM"
+    else:
+        curtime12 = f"{hour}:{min} PM"
 else: 
-    curtime12 = f"{hour}:{min} AM" #12 hr format
+    if hour <= 9:
+        curtime12 = f"0{hour}:{min} AM"
+    else:
+        curtime12 = f"{hour}:{min} AM" #12 hr format
 
 #weekday
 num = datetime.datetime.today()
@@ -34,12 +40,27 @@ def findWeekday(daysahead: int):
 
     return x
 
+def next24hr():
+    
+    next24 = []
+    current = datetime.datetime.now()
+    
+    for i in range(24):
+        x = datetime.timedelta(hours= i)
+        futureHour = current + x
+        futureHour=futureHour.strftime("%I %p")
+        next24.append(futureHour)
+        
+    return next24
+
+    
 
 
 print(curdate, curtime24, curtime12, weekday) #<-testing
 
 print(findWeekday(1)) 
-print(findWeekday(5)) 
 
+Hourlist = next24hr()
+print(Hourlist)
 
 #get date and time!! 

@@ -8,7 +8,7 @@ from PIL import Image
 #needed for the user interface
 
 from getWeather import curTemp, weekTemp, interpretedCode, weekWeather, hourTemp
-from getTime import curdate, curtime12, curtime24, weekday
+from getTime import curdate, curtime12, curtime24, weekday, Hourlist
 from getTime import findWeekday
 #import from my own code!
 
@@ -95,16 +95,25 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
         self.add("Hourly Temps")
         self.add("Precipitation")
 
+
+
         # add widgets on hourly tab
-        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 275, width= 550)
+        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 290, width= 550)
         TemperaturePanel.pack()
 
         for i in range(24):
-            self.sections = ctk.CTkFrame(master = TemperaturePanel, fg_color= Color, corner_radius= 30, border_width=3, border_color= Color2, height= 200, width= 50)
+            self.sections = ctk.CTkFrame(master = TemperaturePanel, fg_color= Color, corner_radius= 30, border_width=3, border_color= Color2, height= 200, width= 100)
             self.sections.pack(side= LEFT , expand=True, fill=BOTH,in_ = TemperaturePanel, pady = 5, padx= 10)
+            self.grid_propagate(False)
             HrT = hourTemp[0][i]
             HrAp = hourTemp[1][i]
             HrC = hourTemp[2][i]
+            Hr = Hourlist[i]
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0, column=i,) #adds the hour
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 2, column=i,) #Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrAp}°F").grid(row= 3, column=i,) #Apparent Temperature
+
+
 
 
 
