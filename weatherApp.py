@@ -86,8 +86,8 @@ class WeeklyPanel(ctk.CTkFrame): #shows weekly highs and lows + an icon with wea
 
 class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
     def __init__(self, master= Main):
-        super().__init__(master= Main, width= 575, height=300, corner_radius=30, fg_color= Color, segmented_button_fg_color= Color2, segmented_button_selected_color= Color , segmented_button_selected_hover_color= ("#e2f1ef","#879ba5"), segmented_button_unselected_color= Color2 ,segmented_button_unselected_hover_color=("#849b96","#26373f"), text_color= Fontcolor, text_color_disabled= Fontcolor)
-        self.place(anchor = CENTER, relx = .325, rely=0.65 )
+        super().__init__(master= Main, width= 575, height=350, corner_radius=30, fg_color= Color, segmented_button_fg_color= Color2, segmented_button_selected_color= Color , segmented_button_selected_hover_color= ("#e2f1ef","#879ba5"), segmented_button_unselected_color= Color2 ,segmented_button_unselected_hover_color=("#849b96","#26373f"), text_color= Fontcolor, text_color_disabled= Fontcolor)
+        self.place(anchor = CENTER, relx = .325, rely=0.675 )
         self.grid_propagate(False)
          
 
@@ -98,7 +98,7 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
 
 
         # add widgets on hourly tab
-        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 285, width= 550)
+        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 300, width= 550)
         TemperaturePanel.pack(expand= True, fill = BOTH)
         #TemperaturePanel.pack_propagate(False)
 
@@ -113,8 +113,8 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
             
             Hr = Hourlist[i]
             ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0) #adds the hour
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 2, pady= (10,5)) #Temperature
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrAp}°F").grid(row= 3,) #Apparent Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 2) #Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrAp}°F").grid(row= 3, pady = (0, 5)) #Apparent Temperature
             
             #adding little icon
             HrC = hourTemp[2][i]
