@@ -65,7 +65,7 @@ def getTempHour(): #Hourly Highs and Lows
     
 
 
-    return HourlyTemp, HourCode, HourCode
+    return HourlyTemp, HourlyApp, HourCode
     #A tuple will come out
         
     
