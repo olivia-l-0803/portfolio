@@ -60,15 +60,41 @@ def getTempHour(): #Hourly Highs and Lows
         HourCode.append(data["hourly"]["weather_code"][index])
 
 
-
-    
-    
-
-
     return HourlyTemp, HourlyApp, HourCode
     #A tuple will come out
         
+def getPrecipitationHour():
+    get = requests.get("https://api.open-meteo.com/v1/forecast?latitude=40.6&longitude=-70.1&hourly=precipitation_probability,precipitation&timezone=America%2FNew_York&past_days=0&forecast_days=7&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch")    
+    if get.status_code != 200:
+        return "Error!!"
+        #catches errors in getting 
+
+    data = get.json()
+    currentTime = str(datetime.now().hour)
+    currentTimeIndex = 0
     
+    dates = data["hourly"]["time"]
+
+    #same as the previous function
+    for i in range(24):
+        if currentTime in dates[i][11:13]:
+            currentTimeIndex = i
+            break
+
+    
+    probability = []
+    inches = []
+
+    for i in range(24):
+        index = i + currentTimeIndex
+
+        probability.append(data["hourly"]["precipitation_probability"][index])
+        inches.append(data["hourly"]["precipitation"][index])
+
+    return probability, inches
+
+
+
 
 
 
@@ -135,6 +161,9 @@ print("Week", weekTemp)
 hourTemp = getTempHour()
 print("Hour", hourTemp)
 
+#testing hourly precipitation
+hourlyPrecip =getPrecipitationHour()
+print("precipitate", hourlyPrecip)
 
 #testing the Current Weather icon
 curCode = currentWeatherCode()
