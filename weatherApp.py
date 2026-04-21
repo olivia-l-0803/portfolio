@@ -1,5 +1,4 @@
 
-from typing import Any, Callable, Tuple
 
 import customtkinter as ctk
 from customtkinter import *
@@ -27,7 +26,7 @@ Color = ("#c4d6d3","#627c89")
 Color2 = ("#a0b3af","#36464e")
 #Theme Information  
 
-class Heading(ctk.CTkFrame):
+class Heading(ctk.CTkFrame): #Adds a large, easy to see section
     def __init__(self, master = Main):
         super().__init__(master = Main, fg_color= Color, corner_radius= 30, height= 175, width= 300)
         self.pack_propagate(False)
@@ -37,19 +36,18 @@ class Heading(ctk.CTkFrame):
         self.apparentTemp = ctk.CTkLabel(master=self, font= (Font, 25 ) , anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"Feels like: {curTemp['Apparent Temperature']}").pack(ipadx= 10, ipady= 10)
         
 
-class dateDisplay(ctk.CTkFrame):
+class dateDisplay(ctk.CTkFrame): # creates a display for the date and time
     def __init__(self, master = Main):
         super().__init__(master = Main, fg_color= Color, corner_radius= 30,  height= 75, width= 175)
         self.pack_propagate(FALSE)
-        self.place(relx= 0.45, rely= 0.1 , anchor= "center")
+        self.place(relx= 0.5, rely= 0.1 , anchor= "center")
 
 
         self.timeTitle = ctk.CTkLabel(master=self , font= (Font, 20 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= curtime12).pack(padx= 10, pady= (10,0))
         self.dayTitle = ctk.CTkLabel(master=self , font= (Font, 15 ), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= f"{weekday}, {curdate}").pack(padx= 10)
-        #self.Sky = ctk.CTkLabel(master=self , font= (Font, 20 ), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).pack(padx= 10, pady= (10,0))
         
-        
-class addIcon(ctk.CTkLabel):
+
+class addIcon(ctk.CTkLabel): # Image icon that shows current weather
     
     def __init__(self, master = Main, fileName = "icon/sunny.png"):
         super().__init__(master= Main, anchor= "center", fg_color= "transparent", text = "")
@@ -58,12 +56,12 @@ class addIcon(ctk.CTkLabel):
         pil_image.resize([100,100])
         self.ctkimage = ctk.CTkImage(light_image= pil_image, size= [100,100]) #stores image 
         self.configure(image = self.ctkimage)
-        self.place(relx= 0.45, rely= 0.25 , anchor= "center")
+        self.place(relx= 0.5, rely= 0.25 , anchor= "center")
 
-        self.label = ctk.CTkLabel(master= Main, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).place(relx= 0.45, rely= 0.35 , anchor= "center")
+        self.label = ctk.CTkLabel(master= Main, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).place(relx= 0.5, rely= 0.35 , anchor= "center")
 
 
-class WeeklyPanel(ctk.CTkFrame):
+class WeeklyPanel(ctk.CTkFrame): #shows weekly highs and lows + an icon with weather
     def __init__(self):
         super().__init__(master = Main, fg_color= Color, corner_radius= 30,  height= 475, width= 325)
         self.grid_propagate(FALSE)
@@ -85,15 +83,30 @@ class WeeklyPanel(ctk.CTkFrame):
 
             self.rowconfigure(index= i, weight= 1) #ensures all rows are equal
 
-class HourlyTABS(ctk.CTkTabview):
+
+class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
     def __init__(self, master= Main):
-        super().__init__(master= Main, width= 575, height=200, corner_radius=30, fg_color= Color)
-        self.place(anchor = CENTER, relx = 3.5, rely=0.6 )
+        super().__init__(master= Main, width= 575, height=300, corner_radius=30, fg_color= Color, segmented_button_fg_color= Color2, segmented_button_selected_color= Color , segmented_button_selected_hover_color= ("#e2f1ef","#879ba5"), segmented_button_unselected_color= Color2 ,segmented_button_unselected_hover_color=("#849b96","#26373f"), text_color= Fontcolor, text_color_disabled= Fontcolor)
+        self.place(anchor = CENTER, relx = .325, rely=0.65 )
+        self.grid_propagate(False)
          
 
-        #adding temperature section
-        self.add("Temperature")
-        button = ctk.CTkButton(master=self.tab("Temperature")).pack()
+        #adding each section!!
+        self.add("Hourly Temps")
+        self.add("Precipitation")
+
+        # add widgets on hourly tab
+        self.label = ctk.CTkLabel(master=self.tab("Hourly Temps"))
+        self.label.grid(row=0, column=0, padx=20, pady=10)
+              
+        
+
+
+
+
+
+
+
 
 
 
@@ -102,7 +115,7 @@ y= dateDisplay()
 icon= addIcon(fileName= interpretedCode[0])
 weekly = WeeklyPanel()
 ctk.CTkLabel(master= Main, font= (Font, 30 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= "Weekly Forecast").place(relx= 0.8, rely= 0.075, anchor= "center")# a label for the weekly section
-Hour= HourlyTABS()
+Hour= HourlyTABS(Main)
 
 Main.mainloop()
-print("xx")
+print("xx App closed")
