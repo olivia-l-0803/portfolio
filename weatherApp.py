@@ -7,7 +7,7 @@ from PIL import Image
 
 #needed for the user interface
 
-from getWeather import curTemp, weekTemp, interpretedCode, weekWeather, hourTemp
+from getWeather import curTemp, weekTemp, interpretedCode, weekWeather, hourTemp, codeToPicture
 from getTime import curdate, curtime12, curtime24, weekday, Hourlist
 from getTime import findWeekday
 #import from my own code!
@@ -98,39 +98,34 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
 
 
         # add widgets on hourly tab
-        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 275, width= 550)
-        TemperaturePanel.pack()
+        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 285, width= 550)
+        TemperaturePanel.pack(expand= True, fill = BOTH)
+        #TemperaturePanel.pack_propagate(False)
 
         for i in range(24):
-            self.sections = ctk.CTkFrame(master = TemperaturePanel, fg_color= Color, corner_radius= 30, border_width=3, border_color= Color2, height= 265, width= 100)
-            self.sections.pack(side= LEFT , expand=True, fill=BOTH,in_ = TemperaturePanel, pady = 5, padx= 10)
-            self.grid_propagate(False)
+            self.sections = ctk.CTkFrame(master = TemperaturePanel, fg_color= Color, corner_radius= 30, border_width=3, border_color= Color2, height= 270, width= 65)
+            self.sections.pack(side= LEFT , expand=True, fill=BOTH, in_ = TemperaturePanel, pady = 5, padx= 10)
+            self.sections.grid_propagate(False)
+
+
             HrT = hourTemp[0][i]
             HrAp = hourTemp[1][i]
-            HrC = hourTemp[2][i]
+            
             Hr = Hourlist[i]
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0, column=i,) #adds the hour
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 2, column=i, pady= (10,5)) #Temperature
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrAp}°F").grid(row= 3, column=i,) #Apparent Temperature
-
-
-
-
-
-
-
-
-
-
-              
-        
-
-
-
-
-
-
-
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0) #adds the hour
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 2, pady= (10,5)) #Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrAp}°F").grid(row= 3,) #Apparent Temperature
+            
+            #adding little icon
+            HrC = hourTemp[2][i]
+            file= codeToPicture(HrC)
+            pil_image = Image.open(file[0]).resize([100,100])
+            ctkimage = ctk.CTkImage(light_image= pil_image, size= [40,40]) #stores image 
+            ctk.CTkLabel(master= self.sections, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= 1)
+            
+            for i in range(4): #everything! must be equal!
+                self.sections.grid_rowconfigure(index=i,weight=1)
+                self.sections.columnconfigure(index=0,weight=1)
 
 
 
