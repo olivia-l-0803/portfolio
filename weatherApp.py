@@ -114,7 +114,7 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
             Hr = Hourlist[i]
             ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0) #adds the hour
             ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 2) #Temperature
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrAp}°F").grid(row= 3, pady = (0, 5)) #Apparent Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= ("#687275","#A6BCC9"), fg_color="transparent", text= f"{HrAp}°F").grid(row= 3, pady = (0, 5)) #Apparent Temperature
             
             #adding little icon
             HrC = hourTemp[2][i]
