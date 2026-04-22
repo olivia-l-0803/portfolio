@@ -56,9 +56,9 @@ class addIcon(ctk.CTkLabel): # Image icon that shows current weather
         pil_image.resize([100,100])
         self.ctkimage = ctk.CTkImage(light_image= pil_image, size= [100,100]) #stores image 
         self.configure(image = self.ctkimage)
-        self.place(relx= 0.5, rely= 0.25 , anchor= "center")
+        self.place(relx= 0.5, rely= 0.255 , anchor= "center")
 
-        self.label = ctk.CTkLabel(master= Main, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).place(relx= 0.5, rely= 0.35 , anchor= "center")
+        self.label = ctk.CTkLabel(master= Main, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent",  text= interpretedCode[1]).place(relx= 0.5, rely= 0.355 , anchor= "center")
 
 
 class WeeklyPanel(ctk.CTkFrame): #shows weekly highs and lows + an icon with weather
@@ -110,11 +110,10 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
 
             HrT = hourTemp[0][i]
             HrAp = hourTemp[1][i]
-            
+            HrC = hourTemp[2][i]
+
             Hr = Hourlist[i]
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0) #adds the hour
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 2) #Temperature
-            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= ("#687275","#A6BCC9"), fg_color="transparent", text= f"{HrAp}°F").grid(row= 3, pady = (0, 5)) #Apparent Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0, pady = (10,5)) #adds the hour
             
             #adding little icon
             HrC = hourTemp[2][i]
@@ -123,7 +122,14 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
             ctkimage = ctk.CTkImage(light_image= pil_image, size= [40,40]) #stores image 
             ctk.CTkLabel(master= self.sections, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= 1)
             
-            for i in range(4): #everything! must be equal!
+            #Weather Code Interpreted
+            ctk.CTkLabel(master= self.sections, font= (Font, 12), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= file[1] ).grid(row= 2)
+            #Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrT}°F" ).grid(row= 3) #Temperature
+            #Apparent Temperature
+            ctk.CTkLabel(master= self.sections, font= (Font, 15), anchor= "center", text_color= ("#687275","#A6BCC9"), fg_color="transparent", text= f"{HrAp}°F").grid(row= 4, pady = (0, 5)) #Apparent Temperature
+            
+            for i in range(5): #everything! must be equal!
                 self.sections.grid_rowconfigure(index=i,weight=1)
                 self.sections.columnconfigure(index=0,weight=1)
         
@@ -136,28 +142,22 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
 
         for i in range(24):
             self.sections2 = ctk.CTkFrame(master = RainPanel, fg_color= Color, corner_radius= 30, border_width=3, border_color= Color2, height= 270, width= 65)
-            self.sections2.pack(side= LEFT , expand=True, fill=BOTH, in_ = TemperaturePanel, pady = 5, padx= 10)
+            self.sections2.pack(side= LEFT , expand=True, fill=BOTH, in_ = RainPanel, pady = 5, padx= 10)
             self.sections2.grid_propagate(False)
 
 
-            HrPpercent = hourlyPrecip[0][i]
+            HrPpercent = int(hourlyPrecip[0][i])
             
             Hr = Hourlist[i]
-            #ctk.CTkLabel(master= self.sections2, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0) #adds the hour
-            #ctk.CTkProgressBar(master= self.sections2, orientation= "vertical", mode = "determinate").set(value= (HrPpercent / 10 ))
-            #ctk.CTkLabel(master= self.sections2, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= f"{HrPpercent}%" ).grid(row= 2) #percentage
+            ctk.CTkLabel(master= self.sections2, font= (Font, 15), anchor= "center", text_color= Fontcolor, fg_color= "transparent", text= Hr).grid(row= 0, pady = (10,5)) #adds the hour (same as before)
+            pbar=ctk.CTkProgressBar(master= self.sections2, height= 100, width = 20, orientation= "vertical", mode = "determinate", progress_color= "#95c9e4", fg_color= "#4a809b", bg_color= "transparent") #Adding a percentage bar!!!
+            pbar.set(value= (HrPpercent / 100 ))
+            pbar.grid(row=1)
+            ctk.CTkLabel(master= self.sections2, font= (Font, 15), anchor= "center", text_color= ("#3b6b85","#6ab5dd"), fg_color="transparent", text= f"{HrPpercent}%" ).grid(row= 2) #percentage
             
-            
-            #adding little icon (same as other panel)
-            """ HrC = hourTemp[2][i]
-            file= codeToPicture(HrC)
-            pil_image = Image.open(file[0]).resize([100,100])
-            ctkimage = ctk.CTkImage(light_image= pil_image, size= [40,40]) #stores image 
-            ctk.CTkLabel(master= self.sections, anchor= "center", fg_color="transparent", text= "", image= ctkimage).grid(row= 1)
-             """
             for i in range(4): #everything! must be equal!
-                self.sections.grid_rowconfigure(index=i,weight=1)
-                self.sections.columnconfigure(index=0,weight=1)
+                self.sections2.grid_rowconfigure(index=i,weight=1)
+                self.sections2.columnconfigure(index=0,weight=1)
 
 
 
