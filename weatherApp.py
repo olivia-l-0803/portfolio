@@ -173,7 +173,7 @@ def changeColor():
     ctk.set_appearance_mode(colorVar.get())
 Switch = ctk.CTkSwitch(master= Main, text = "Mode", command= changeColor, 
                        variable= colorVar, onvalue= "light", offvalue= "dark",
-                        text_color= Fontcolor, fg_color= Color, progress_color= Color2, button_hover_color=("#526966","#718e9c"))
+                        text_color= Fontcolor, fg_color= Color, progress_color= Color, button_color= Color2 , button_hover_color=("#526966","#718e9c"))
 Switch.place(anchor= "center", relx= .97, rely= .03)
 
 
