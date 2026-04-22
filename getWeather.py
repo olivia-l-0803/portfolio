@@ -94,10 +94,6 @@ def getPrecipitationHour():
     return probability, inches
 
 
-
-
-
-
 #getting + interpreting Weather Codes!
 
 def currentWeatherCode():
@@ -119,15 +115,15 @@ def codeToPicture(code: int): #this will interpret the code to a tuple (image fi
     if code in (51, 53, 55):
         return "icons/drizzle.png", "Drizzle"
     if code in (56, 57):
-        return "icons/snow.png", "Freezing Drizzle"
+        return "icons/snow.png", "Freezing \n Drizzle"
     if code in (61, 63, 65):
         return "icons/rainy.png", "Rainy"
     if code in (66, 67):
-        return "icons/snow.png", "Freezing Rain"
+        return "icons/snow.png", "Freezing \n Rain"
     if code in (71, 73, 75, 77, 85, 86):
         return "icons/snow.png", "Snow"
     if code in (95, 96, 99):
-        return "icons/thunderstorm.png", "Thunderstorm"
+        return "icons/thunderstorm.png", "Stormy"
     
 def getForecastWeek(): #function for the weeks weather codes 
     get = requests.get("https://api.open-meteo.com/v1/forecast?latitude=40.6&longitude=-70.1&daily=weather_code&timezone=America%2FNew_York&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch")
