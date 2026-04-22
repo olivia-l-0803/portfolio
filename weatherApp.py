@@ -12,17 +12,17 @@ from getTime import curdate, curtime12, curtime24, weekday, Hourlist
 from getTime import findWeekday
 #import from my own code!
 
-Main = ctk.CTk(fg_color= ("#dfe8e6","#819daa")) #You can use tuples to store different colors! (Light, Dark)
+Main = ctk.CTk(fg_color= ("#dfe8e6","#708088")) #You can use tuples to store different colors! (Light, Dark)
 
 Main.geometry("1000x600")
 Main.resizable(False, False)
 
 #setting up app window
-
+colorVar = StringVar(value="light")
 ctk.set_appearance_mode("light")
 Font = "Inter"
-Fontcolor = ("#4a5356","#CAD9E2")
-Color = ("#c4d6d3","#627c89")
+Fontcolor = ("#4a5356","#B5CDDB")
+Color = ("#c4d6d3","#4a606b")
 Color2 = ("#a0b3af","#36464e")
 #Theme Information  
 
@@ -86,7 +86,8 @@ class WeeklyPanel(ctk.CTkFrame): #shows weekly highs and lows + an icon with wea
 
 class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
     def __init__(self, master= Main):
-        super().__init__(master= Main, width= 575, height=350, corner_radius=30, fg_color= Color, segmented_button_fg_color= Color2, segmented_button_selected_color= Color , segmented_button_selected_hover_color= ("#e2f1ef","#879ba5"), segmented_button_unselected_color= Color2 ,segmented_button_unselected_hover_color=("#849b96","#26373f"), text_color= Fontcolor, text_color_disabled= Fontcolor)
+        super().__init__(master= Main, width= 575, height=350, corner_radius=30, 
+                         fg_color= Color, segmented_button_fg_color= Color2, segmented_button_selected_color= Color , segmented_button_selected_hover_color= ("#e2f1ef","#879ba5"), segmented_button_unselected_color= Color2 ,segmented_button_unselected_hover_color=("#849b96","#26373f"), text_color= Fontcolor, text_color_disabled= Fontcolor)
         self.place(anchor = CENTER, relx = .325, rely=0.675 )
         self.grid_propagate(False)
          
@@ -98,7 +99,7 @@ class HourlyTABS(ctk.CTkTabview): # a tab section with hourly updates
 
 
         # Constructing the Hourly Temperature Tab!!
-        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 300, width= 550)
+        TemperaturePanel= ctk.CTkScrollableFrame(master= self.tab("Hourly Temps"), orientation="horizontal",  fg_color= Color,  height= 300, width= 550, scrollbar_button_color= Color2, scrollbar_button_hover_color=("#e2f1ef","#879ba5"))
         TemperaturePanel.pack(expand= True, fill = BOTH)
         #TemperaturePanel.pack_propagate(False)
 
@@ -167,6 +168,15 @@ icon= addIcon(fileName= interpretedCode[0])
 weekly = WeeklyPanel()
 ctk.CTkLabel(master= Main, font= (Font, 30 ), anchor= "center", text_color= Fontcolor, fg_color="transparent", text= "Weekly Forecast").place(relx= 0.8, rely= 0.075, anchor= "center")# a label for the weekly section
 Hour= HourlyTABS(Main)
+
+def changeColor():
+    ctk.set_appearance_mode(colorVar.get())
+Switch = ctk.CTkSwitch(master= Main, text = "Mode", command= changeColor, 
+                       variable= colorVar, onvalue= "light", offvalue= "dark",
+                        text_color= Fontcolor, fg_color= Color, progress_color= Color2, button_hover_color=("#526966","#718e9c"))
+Switch.place(anchor= "center", relx= .97, rely= .03)
+
+
 
 Main.mainloop()
 print("xx App closed")
